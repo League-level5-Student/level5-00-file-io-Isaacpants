@@ -2,6 +2,10 @@ package _03_To_Do_List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -22,6 +26,8 @@ public class ToDoList implements ActionListener {
 		ToDoList tdl = new ToDoList();
 		tdl.setup();
 	}void setup(){
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		jf.setVisible(true);
 		jf.add(jp);
 		jp.add(jb);
@@ -41,6 +47,8 @@ public class ToDoList implements ActionListener {
 		jb2.addActionListener(this);
 		jb3.addActionListener(this);
 		jb4.addActionListener(this);
+		
+	jf.pack();	
 	}
 	/*
 	 * Create a program with five buttons, add task, view tasks, remove task, save list, and load list. 
@@ -69,14 +77,44 @@ public class ToDoList implements ActionListener {
 			String add = JOptionPane.showInputDialog("What is the task");
 			arr.add(add);
 		}else if(e.getSource()==jb1) {
+			if(arr.size()==0) {
+				JOptionPane.showMessageDialog(null, "You have no tasks");
+			}
 			for (int i = 0; i < arr.size(); i++) {
-				System.out.println(arr.get(i));
+				JOptionPane.showMessageDialog(null, arr.get(i));
 			}
 		}else if(e.getSource()==jb2) {
 			String stringRemove = JOptionPane.showInputDialog("Which number task would you like to remove");
-			int fakeRemove = Integer.parseInt(stringRemove);
-			int remove = fakeRemove-1;
+			int remove = (Integer.parseInt(stringRemove)) -1;
+			
 			arr.remove(remove);
+		}else if(e.getSource()==jb3) {
+			try {
+				FileWriter fw = new FileWriter("src/_00_Intro_To_File_Input_and_Output/test2.txt");
+				
+			
+				
+				fw.write(""+ arr);
+					
+				fw.close();
+			} catch (IOException arg0) {
+				arg0.printStackTrace();
+			}
+		}else if(e.getSource()==jb4) {
+			String location = JOptionPane.showInputDialog("What is the location of the file");
+			try {
+				FileReader fr = new FileReader("src/_00_Intro_To_File_Input_and_Output/test.txt");
+				int c = fr.read();
+				while(c != -1){
+					System.out.print((char)c);
+					c = fr.read();
+				}
+				fr.close();
+			} catch (FileNotFoundException a) {
+				a.printStackTrace();
+			} catch (IOException i) {
+				i.printStackTrace();
+			}
 		}
-	}
+		}
 }
