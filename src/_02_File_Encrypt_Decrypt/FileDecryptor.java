@@ -1,6 +1,25 @@
 package _02_File_Encrypt_Decrypt;
 
+import javax.swing.JOptionPane;
+
 public class FileDecryptor {
+	public static void main(String[] args) {
+		String ns = JOptionPane.showInputDialog("Write a phrase or sentance to decrypt");
+		String stringShift = JOptionPane.showInputDialog("What do you want to shift it by");
+		int shift = Integer.parseInt(stringShift);
+		String finals ="";
+		String[] finalS = new String[ns.length()];
+		char[] c = new char[ns.length()];
+		for (int i = 0; i < ns.length(); i++) {
+		int numeric = Character.getNumericValue(ns.charAt(i));
+		numeric -= shift;
+		char newC = (char)numeric;
+				c[i] = newC;
+			finalS[i] = Character.toString(newC);
+			finals = finalS[i];
+		}
+		JOptionPane.showMessageDialog(null, finals);
+	}
 	/*
 	 * Decryption is the process of taking encoded or encrypted text or other data
 	 * and converting it back into text that you or the computer can read and understand.

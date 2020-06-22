@@ -1,6 +1,33 @@
 package _02_File_Encrypt_Decrypt;
 
+import javax.swing.JOptionPane;
+
 public class FileEncryptor {
+	public static void main(String[] args) {
+		
+		String ns = JOptionPane.showInputDialog("Write a phrase or sentance to encrypt");
+		String stringShift = JOptionPane.showInputDialog("What do you want to shift it by");
+		int shift = Integer.parseInt(stringShift);
+		String finals ="";
+		String[] finalS = new String[ns.length()];
+		char[] c = new char[ns.length()];
+		
+		for (int i = 0; i < ns.length(); i++) {
+		//int numeric = Character.getNumericValue(ns.charAt(i));
+		
+	//  System.out.println(numeric);
+	//	numeric += shift;
+	//	char newC = (char)numeric;
+		//System.out.println(newC);
+			char newC = (char) (ns.charAt(i) + shift);
+			System.out.println(newC);
+				c[i] = newC;
+			finalS[i] = Character.toString(newC);
+			finals = finalS[i];
+		}
+		JOptionPane.showMessageDialog(null, finals);
+	}
+	
 	/*
 	 * Encryption is the process of encoding a message or information
 	 * in such a way that only authorized parties can access it and
